@@ -66,7 +66,7 @@ class VocabularyDataSource {
     for (var vocab in vocabList) {
       if (vocab.englishWord.toLowerCase() == englishWord.toLowerCase()) {
         vocab.vietnameseMeaning = newMeaning;
-        print("✅ Đã cập nhật từ '$englishWord' thành: $newMeaning");
+        print("Đã cập nhật từ '$englishWord' thành: $newMeaning");
         return;
       }
     }
