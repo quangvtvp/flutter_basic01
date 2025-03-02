@@ -92,10 +92,10 @@ void main() async {
     String? choice = stdin.readLineSync()?.trim();
 
     if (choice == '1') {
-     await  dataSource.printAllVocabulary();
+      await dataSource.printAllVocabulary();
     } else if (choice == '2') {
       await dataSource.addVocabulary();
-      } else if (choice == '3') {
+    } else if (choice == '3') {
       await dataSource.searchMeaning();
     } else if (choice == '0') {
       print('Thoát chương trình. Hẹn gặp lại!');
