@@ -1,0 +1,60 @@
+import 'dart:math';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class Student {
+  final String name;
+  final String birthDate;
+  final IconData icon;
+
+  Student({required this.name, required this.birthDate, required this.icon});
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final List<Student> students = [
+    Student(name: "Dương Đình Tuyến", birthDate: "05/04/2007", icon: Icons.person),
+    Student(name: "Trần Hoàng Hà Vi", birthDate: "22/06/2007", icon: Icons.person),
+    Student(name: "Ma Khánh Lê Lợi", birthDate: "20/07/2007", icon: Icons.person),
+    Student(name: "Ma Khánh Lẻ loi", birthDate: "10/09/2007", icon: Icons.person),
+  ];
+
+  int currentIndex = 0;
+
+  void showRandomStudent() {
+    setState(() {
+      currentIndex = Random().nextInt(students.length);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final student = students[currentIndex];
+
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text("Welcome Screen")),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(student.icon, size: 80, color: Colors.blue),
+              SizedBox(height: 10),
+              Text(student.name, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              Text("Ngày sinh: ${student.birthDate}", style: TextStyle(fontSize: 18)),
+              SizedBox(height: 20),
+              ElevatedButton(onPressed: showRandomStudent, child: Text("Next")),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

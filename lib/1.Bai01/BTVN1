@@ -1,0 +1,76 @@
+import 'dart:math';
+import 'package:flutter/material.dart';
+
+class Vocabulary {
+  final String english;
+  final String vietnamese;
+
+  Vocabulary({required this.english, required this.vietnamese});
+}
+
+class FlashcardScreen extends StatefulWidget {
+  @override
+  _FlashcardScreenState createState() => _FlashcardScreenState();
+}
+
+class _FlashcardScreenState extends State<FlashcardScreen> {
+  final List<Vocabulary> vocabList = [
+    Vocabulary(english: "Apple", vietnamese: "Táo"),
+    Vocabulary(english: "Car", vietnamese: "Xe hơi"),
+    Vocabulary(english: "House", vietnamese: "Ngôi nhà"),
+  ];
+
+  int currentIndex = 0;
+  bool isFlipped = false;
+
+  void flipCard() {
+    setState(() {
+      isFlipped = !isFlipped;
+    });
+  }
+
+  void changeWord() {
+    setState(() {
+      currentIndex = Random().nextInt(vocabList.length);
+      isFlipped = false;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final vocab = vocabList[currentIndex];
+
+    return Scaffold(
+      appBar: AppBar(title: Text("Flashcard")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 200,
+              height: 150,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: Colors.blue, borderRadius: BorderRadius.circular(10)),
+              child: Text(
+                isFlipped ? vocab.vietnamese : vocab.english,
+                style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(onPressed: flipCard, child: Text("Xem")),
+            SizedBox(height: 10),
+            ElevatedButton(onPressed: changeWord, child: Text("Đổi")),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+void main() {
+  runApp(MaterialApp(home: FlashcardScreen()));
+}
